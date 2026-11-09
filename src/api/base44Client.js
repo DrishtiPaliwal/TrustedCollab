@@ -14,3 +14,4 @@ export const base44 = createClient({
   serverUrl: '',
   appBaseUrl
 });
+
