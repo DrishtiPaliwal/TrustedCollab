@@ -1,0 +1,109 @@
+{
+  "name": "Dispute",
+  "type": "object",
+  "properties": {
+    "campaign_id": {
+      "type": "string"
+    },
+    "campaign_title": {
+      "type": "string"
+    },
+    "raised_by_user_id": {
+      "type": "string"
+    },
+    "raised_by_name": {
+      "type": "string"
+    },
+    "against_user_id": {
+      "type": "string"
+    },
+    "against_name": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "deliverable",
+        "payment",
+        "performance_claim",
+        "evidence_authenticity",
+        "conduct",
+        "other"
+      ],
+      "enumColors": [
+        "blue",
+        "red",
+        "yellow",
+        "purple",
+        "gray",
+        "gray"
+      ]
+    },
+    "description": {
+      "type": "string"
+    },
+    "evidence_document_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "under_review",
+        "resolved",
+        "dismissed"
+      ],
+      "enumColors": [
+        "yellow",
+        "yellow",
+        "green",
+        "gray"
+      ],
+      "default": "open"
+    },
+    "admin_notes": {
+      "type": "string"
+    },
+    "resolution": {
+      "type": "string"
+    },
+    "resolved_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "raised_by_user_id",
+    "description"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.raised_by_user_id": "{{user.id}}"
+        },
+        {
+          "data.against_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "name": "SocialMetric",
+  "type": "object",
+  "properties": {
+    "social_account_id": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "platform": {
+      "type": "string"
+    },
+    "metric_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "followers": {
+      "type": "number"
+    },
+    "reach": {
+      "type": "number"
+    },
+    "impressions": {
+      "type": "number"
+    },
+    "engagement_rate": {
+      "type": "number"
+    },
+    "views": {
+      "type": "number"
+    },
+    "posts": {
+      "type": "number"
+    },
+    "data_source": {
+      "type": "string",
+      "enum": [
+        "oauth_connected",
+        "self_reported"
+      ],
+      "enumColors": [
+        "green",
+        "yellow"
+      ],
+      "default": "self_reported"
+    }
+  },
+  "required": [
+    "user_id",
+    "platform"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

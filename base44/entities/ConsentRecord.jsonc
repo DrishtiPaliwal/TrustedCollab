@@ -1,0 +1,58 @@
+{
+  "name": "ConsentRecord",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "consent_type": {
+      "type": "string",
+      "enum": [
+        "data_processing",
+        "marketing",
+        "analytics",
+        "document_sharing"
+      ],
+      "enumColors": [
+        "blue",
+        "purple",
+        "gray",
+        "green"
+      ]
+    },
+    "granted": {
+      "type": "boolean",
+      "default": false
+    },
+    "policy_version": {
+      "type": "string",
+      "default": "1.0"
+    },
+    "granted_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "revoked_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "user_id",
+    "consent_type"
+  ],
+  "rls": {
+    "read": {
+      "data.user_id": "{{user.id}}"
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "data.user_id": "{{user.id}}"
+    },
+    "delete": {
+      "data.user_id": "{{user.id}}"
+    }
+  }
+}

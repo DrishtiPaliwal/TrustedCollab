@@ -1,0 +1,183 @@
+{
+  "name": "Campaign",
+  "type": "object",
+  "properties": {
+    "brand_user_id": {
+      "type": "string"
+    },
+    "brand_profile_id": {
+      "type": "string"
+    },
+    "brand_name": {
+      "type": "string"
+    },
+    "creator_user_id": {
+      "type": "string"
+    },
+    "creator_profile_id": {
+      "type": "string"
+    },
+    "creator_name": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "product_name": {
+      "type": "string"
+    },
+    "objective": {
+      "type": "string"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "duration_days": {
+      "type": "number"
+    },
+    "deliverables": {
+      "type": "string"
+    },
+    "content_links": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "budget": {
+      "type": "number"
+    },
+    "creator_fee": {
+      "type": "number"
+    },
+    "reach": {
+      "type": "number"
+    },
+    "impressions": {
+      "type": "number"
+    },
+    "views": {
+      "type": "number"
+    },
+    "clicks": {
+      "type": "number"
+    },
+    "conversions": {
+      "type": "number"
+    },
+    "revenue_attributed": {
+      "type": "number"
+    },
+    "roi": {
+      "type": "number"
+    },
+    "attribution_method": {
+      "type": "string"
+    },
+    "evidence_summary": {
+      "type": "string"
+    },
+    "performance_source": {
+      "type": "string",
+      "enum": [
+        "self_reported",
+        "independently_verified"
+      ],
+      "enumColors": [
+        "yellow",
+        "green"
+      ],
+      "default": "self_reported"
+    },
+    "brand_confirmed": {
+      "type": "boolean",
+      "default": false
+    },
+    "creator_confirmed": {
+      "type": "boolean",
+      "default": false
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "active",
+        "completed",
+        "disputed"
+      ],
+      "enumColors": [
+        "gray",
+        "blue",
+        "green",
+        "red"
+      ],
+      "default": "active"
+    },
+    "campaign_report_uri": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.brand_user_id": "{{user.id}}"
+        },
+        {
+          "data.creator_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "data.brand_user_id": "{{user.id}}"
+        },
+        {
+          "data.creator_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "name": "Certification",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "brand_name": {
+      "type": "string"
+    },
+    "product_id": {
+      "type": "string"
+    },
+    "product_name": {
+      "type": "string"
+    },
+    "certificate_name": {
+      "type": "string"
+    },
+    "issuing_authority": {
+      "type": "string"
+    },
+    "certificate_number": {
+      "type": "string"
+    },
+    "issue_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "expiry_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "scope": {
+      "type": "string"
+    },
+    "document_id": {
+      "type": "string"
+    },
+    "regulatory_approval": {
+      "type": "boolean",
+      "default": false
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": [
+        "not_submitted",
+        "pending",
+        "verified",
+        "rejected",
+        "expired",
+        "requires_renewal"
+      ],
+      "enumColors": [
+        "gray",
+        "yellow",
+        "green",
+        "red",
+        "gray",
+        "yellow"
+      ],
+      "default": "pending"
+    }
+  },
+  "required": [
+    "user_id",
+    "certificate_name"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "name": "BrandProfile",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "company_name": {
+      "type": "string"
+    },
+    "brand_name": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "registration_number": {
+      "type": "string"
+    },
+    "industry": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "contact_name": {
+      "type": "string"
+    },
+    "contact_email": {
+      "type": "string"
+    },
+    "contact_phone": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "logo": {
+      "type": "string"
+    },
+    "years_in_operation": {
+      "type": "number"
+    },
+    "company_size": {
+      "type": "string"
+    },
+    "preferred_creator_categories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "preferred_locations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "typical_budget_min": {
+      "type": "number"
+    },
+    "typical_budget_max": {
+      "type": "number"
+    },
+    "currency": {
+      "type": "string",
+      "default": "INR"
+    },
+    "collaboration_requirements": {
+      "type": "string"
+    },
+    "profile_completion": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "required": [
+    "user_id",
+    "brand_name"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

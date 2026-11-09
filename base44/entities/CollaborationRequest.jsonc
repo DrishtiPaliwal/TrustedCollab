@@ -1,0 +1,136 @@
+{
+  "name": "CollaborationRequest",
+  "type": "object",
+  "properties": {
+    "from_user_id": {
+      "type": "string"
+    },
+    "from_name": {
+      "type": "string"
+    },
+    "from_type": {
+      "type": "string",
+      "enum": [
+        "creator",
+        "brand"
+      ],
+      "enumColors": [
+        "blue",
+        "purple"
+      ]
+    },
+    "to_user_id": {
+      "type": "string"
+    },
+    "to_name": {
+      "type": "string"
+    },
+    "to_type": {
+      "type": "string",
+      "enum": [
+        "creator",
+        "brand"
+      ],
+      "enumColors": [
+        "blue",
+        "purple"
+      ]
+    },
+    "campaign_title": {
+      "type": "string"
+    },
+    "product_name": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "proposed_budget": {
+      "type": "number"
+    },
+    "collaboration_type": {
+      "type": "string"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "accepted",
+        "declined",
+        "withdrawn",
+        "completed"
+      ],
+      "enumColors": [
+        "yellow",
+        "green",
+        "gray",
+        "gray",
+        "blue"
+      ],
+      "default": "pending"
+    },
+    "responded_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "response_message": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "from_user_id",
+    "to_user_id",
+    "campaign_title"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.from_user_id": "{{user.id}}"
+        },
+        {
+          "data.to_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "data.from_user_id": "{{user.id}}"
+        },
+        {
+          "data.to_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.from_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

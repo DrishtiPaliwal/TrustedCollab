@@ -1,0 +1,143 @@
+{
+  "name": "VerificationRecord",
+  "type": "object",
+  "properties": {
+    "subject_user_id": {
+      "type": "string"
+    },
+    "subject_name": {
+      "type": "string"
+    },
+    "subject_type": {
+      "type": "string",
+      "enum": [
+        "creator",
+        "brand",
+        "product",
+        "campaign",
+        "social_account"
+      ],
+      "enumColors": [
+        "blue",
+        "purple",
+        "green",
+        "yellow",
+        "gray"
+      ]
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "identity",
+        "business",
+        "social",
+        "product_document",
+        "collaboration",
+        "performance"
+      ],
+      "enumColors": [
+        "blue",
+        "purple",
+        "gray",
+        "green",
+        "yellow",
+        "yellow"
+      ]
+    },
+    "related_id": {
+      "type": "string"
+    },
+    "related_name": {
+      "type": "string"
+    },
+    "evidence_document_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "not_submitted",
+        "pending",
+        "verified",
+        "rejected",
+        "expired",
+        "requires_renewal"
+      ],
+      "enumColors": [
+        "gray",
+        "yellow",
+        "green",
+        "red",
+        "gray",
+        "yellow"
+      ],
+      "default": "pending"
+    },
+    "submitted_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "reviewed_by": {
+      "type": "string"
+    },
+    "reviewed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "reviewer_notes": {
+      "type": "string"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "method": {
+      "type": "string",
+      "enum": [
+        "administrator",
+        "external_source"
+      ],
+      "enumColors": [
+        "gray",
+        "blue"
+      ],
+      "default": "administrator"
+    }
+  },
+  "required": [
+    "subject_user_id",
+    "category"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.subject_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

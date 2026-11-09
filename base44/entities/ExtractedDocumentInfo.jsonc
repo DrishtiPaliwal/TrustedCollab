@@ -1,0 +1,86 @@
+{
+  "name": "ExtractedDocumentInfo",
+  "type": "object",
+  "properties": {
+    "document_id": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "document_title": {
+      "type": "string"
+    },
+    "extracted_fields": {
+      "type": "string"
+    },
+    "extraction_source": {
+      "type": "string",
+      "enum": [
+        "manual_entry",
+        "administrator",
+        "external_verification"
+      ],
+      "enumColors": [
+        "gray",
+        "blue",
+        "green"
+      ],
+      "default": "manual_entry"
+    },
+    "confidence": {
+      "type": "number"
+    },
+    "extracted_by": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "document_id",
+    "user_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "name": "Product",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "brand_profile_id": {
+      "type": "string"
+    },
+    "brand_name": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "retail_price": {
+      "type": "number"
+    },
+    "wholesale_price": {
+      "type": "number"
+    },
+    "currency": {
+      "type": "string",
+      "default": "INR"
+    },
+    "specifications": {
+      "type": "string"
+    },
+    "ingredients": {
+      "type": "string"
+    },
+    "ingredient_proportions": {
+      "type": "string"
+    },
+    "manufacturing_details": {
+      "type": "string"
+    },
+    "quality_control": {
+      "type": "string"
+    },
+    "product_claims": {
+      "type": "string"
+    },
+    "side_effects_warnings": {
+      "type": "string"
+    },
+    "licenses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_level": {
+      "type": "string",
+      "enum": [
+        "brand_provided",
+        "independently_tested",
+        "regulatory_approved"
+      ],
+      "enumColors": [
+        "gray",
+        "blue",
+        "green"
+      ],
+      "default": "brand_provided"
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": [
+        "not_submitted",
+        "pending",
+        "verified",
+        "rejected",
+        "requires_renewal"
+      ],
+      "enumColors": [
+        "gray",
+        "yellow",
+        "green",
+        "red",
+        "yellow"
+      ],
+      "default": "not_submitted"
+    }
+  },
+  "required": [
+    "name",
+    "user_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

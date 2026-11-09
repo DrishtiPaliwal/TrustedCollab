@@ -1,0 +1,27 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "account_type": {
+      "type": "string",
+      "enum": [
+        "creator",
+        "brand"
+      ],
+      "enumColors": [
+        "blue",
+        "purple"
+      ]
+    },
+    "onboarding_complete": {
+      "type": "boolean",
+      "default": false
+    },
+    "location": {
+      "type": "string"
+    },
+    "headline": {
+      "type": "string"
+    }
+  }
+}

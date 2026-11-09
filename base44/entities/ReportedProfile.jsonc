@@ -1,0 +1,83 @@
+{
+  "name": "ReportedProfile",
+  "type": "object",
+  "properties": {
+    "reported_user_id": {
+      "type": "string"
+    },
+    "reported_name": {
+      "type": "string"
+    },
+    "reporter_user_id": {
+      "type": "string"
+    },
+    "reporter_name": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string",
+      "enum": [
+        "fake_metrics",
+        "misleading_claims",
+        "fake_documents",
+        "impersonation",
+        "conduct",
+        "other"
+      ],
+      "enumColors": [
+        "yellow",
+        "yellow",
+        "red",
+        "red",
+        "gray",
+        "gray"
+      ]
+    },
+    "details": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "under_review",
+        "resolved",
+        "dismissed"
+      ],
+      "enumColors": [
+        "yellow",
+        "yellow",
+        "green",
+        "gray"
+      ],
+      "default": "open"
+    },
+    "admin_notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "reported_user_id",
+    "reason"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

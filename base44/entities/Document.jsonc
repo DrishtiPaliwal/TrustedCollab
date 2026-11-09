@@ -1,0 +1,170 @@
+{
+  "name": "Document",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "owner_type": {
+      "type": "string",
+      "enum": [
+        "creator",
+        "brand"
+      ],
+      "enumColors": [
+        "blue",
+        "purple"
+      ]
+    },
+    "document_type": {
+      "type": "string",
+      "enum": [
+        "identity",
+        "business_registration",
+        "lab_report",
+        "license",
+        "certificate",
+        "campaign_evidence",
+        "product_document",
+        "other"
+      ],
+      "enumColors": [
+        "blue",
+        "purple",
+        "green",
+        "blue",
+        "green",
+        "yellow",
+        "gray",
+        "gray"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "file_uri": {
+      "type": "string"
+    },
+    "file_name": {
+      "type": "string"
+    },
+    "file_size": {
+      "type": "number"
+    },
+    "mime_type": {
+      "type": "string"
+    },
+    "related_type": {
+      "type": "string",
+      "enum": [
+        "product",
+        "campaign",
+        "profile",
+        "none"
+      ],
+      "enumColors": [
+        "purple",
+        "blue",
+        "gray",
+        "gray"
+      ],
+      "default": "none"
+    },
+    "related_id": {
+      "type": "string"
+    },
+    "related_name": {
+      "type": "string"
+    },
+    "issuer": {
+      "type": "string"
+    },
+    "document_number": {
+      "type": "string"
+    },
+    "issue_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "expiry_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": [
+        "not_submitted",
+        "pending",
+        "verified",
+        "rejected",
+        "expired",
+        "requires_renewal"
+      ],
+      "enumColors": [
+        "gray",
+        "yellow",
+        "green",
+        "red",
+        "gray",
+        "yellow"
+      ],
+      "default": "pending"
+    },
+    "review_notes": {
+      "type": "string"
+    },
+    "reviewed_by": {
+      "type": "string"
+    },
+    "reviewed_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "user_id",
+    "title",
+    "file_uri"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}
