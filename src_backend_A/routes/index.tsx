@@ -1,0 +1,20 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, ShieldCheck, Users, Handshake, Fingerprint, CircleCheck } from "lucide-react";
+const partnership = new URL("../assets/creator-partnership.jpg", import.meta.url).href;
+import { Button } from "../components/ui/button";
+import { TrustFeatures, Steps, JoinButtons, FinalCTA, AudienceSections, EvidenceLevels } from "../components/marketing";
+import { pageMeta } from "../lib/page-meta";
+
+export const Route = createFileRoute("/" as any)({ head: () => pageMeta("CreatorTrust — Great Collaborations Begin With Trust", "Discover credible creators and reliable brands through transparent information and evidence-backed partnerships."), component: Index });
+
+function Index() {
+  return <>
+    <section className="hero"><img className="hero-photo" src={partnership} alt="A creator and brand professional discussing a collaboration" width={1536} height={1024} /><div className="site-container py-12"><div className="eyebrow"><span className="h-px w-6 bg-hero-muted" />A new standard for collaboration</div><h1 className="mt-6">Great Collaborations<br />Begin With <span className="text-hero-muted">Trust.</span></h1><p className="mt-6 max-w-120 text-base leading-7 text-hero-muted">Discover credible creators. Connect with reliable brands. Make collaboration decisions backed by transparent data and verified information.</p><div className="mt-8"><JoinButtons inverse /></div><div className="mt-7 flex items-center gap-2 text-xs text-hero-muted"><ShieldCheck size={15} /> Real people. Transparent information. Meaningful partnerships.</div></div><div className="hero-detail"><div className="flex items-center gap-3"><span className="icon-tile"><Handshake size={23} /></span><div><p className="text-sm font-bold">Better partnerships start here.</p><p className="mt-1 text-xs text-muted-foreground">Creators & brands, on the same side.</p></div></div></div></section>
+    <div className="border-b border-border bg-muted py-6"><div className="site-container flex flex-wrap items-center justify-center gap-x-12 gap-y-4 text-xs font-medium text-muted-foreground"><span className="text-foreground">Built on what matters.</span><span className="flex items-center gap-2"><Fingerprint className="size-4 text-primary" />Identity & credibility</span><span className="flex items-center gap-2"><CircleCheck className="size-4 text-primary" />Evidence, not assumptions</span><span className="flex items-center gap-2"><Users className="size-4 text-primary" />Shared success</span></div></div>
+    <section className="section-band"><div className="site-container"><div className="mb-10 text-center"><p className="eyebrow justify-center">The CreatorTrust difference</p><h2 className="section-heading mt-3">More Than Connections.<br />A Foundation of Trust.</h2><p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-muted-foreground">The right partnership goes beyond a profile. Get the clarity you need<br className="hidden md:block" /> to collaborate with confidence.</p></div><TrustFeatures /></div></section>
+    <section className="section-band border-y border-border bg-muted"><div className="site-container"><div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><p className="eyebrow">From introduction to opportunity</p><h2 className="section-heading mt-3">Good partnerships. Clear steps.</h2></div><Button asChild variant="link"><Link to="/how-it-works">See how it works <ArrowRight /></Link></Button></div><Steps /></div></section>
+    <AudienceSections />
+    <section className="section-band border-t border-border bg-muted"><div className="site-container"><p className="eyebrow">Transparency by design</p><h2 className="section-heading mt-3">Not every claim is the same.</h2><p className="mb-8 mt-4 max-w-2xl text-sm leading-6 text-muted-foreground">Know where information comes from and what has been reviewed. Clear evidence labels keep expectations honest.</p><EvidenceLevels /><Button asChild variant="link" className="mt-5 px-0"><Link to="/trust">Explore our trust framework <ArrowRight /></Link></Button></div></section>
+    <FinalCTA />
+  </>;
+}

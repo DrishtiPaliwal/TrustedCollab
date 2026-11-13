@@ -1,0 +1,45 @@
+import { createFileRoute, Link } from '@tanstack/react-router';
+import { ShieldCheck, ArrowRight } from 'lucide-react';
+import { Button } from '../components/ui/button';
+import { pageMeta } from '../lib/page-meta';
+
+export const Route = createFileRoute('/login' as never)({
+  head: () => pageMeta('Log In', 'CreatorTrust account access information and first-phase profile journey previews.'),
+  component: Login,
+});
+
+function Login() {
+  return (
+    <section className="section-band">
+      <div className="site-container max-w-xl text-center">
+        <div className="icon-tile mx-auto">
+          <ShieldCheck />
+        </div>
+
+        <p className="eyebrow mt-6 justify-center">Welcome to CreatorTrust</p>
+        <h1 className="section-heading mt-4">Your next partnership awaits.</h1>
+        <p className="mt-5 text-base leading-7 text-muted-foreground">
+          Account access is coming in a later phase. For now, explore how your creator or brand profile will take shape.
+        </p>
+
+        <div className="journey-banner mt-8 text-left">
+          <strong>First-phase preview</strong>
+          <br />
+          Live registration and login are not enabled. We won’t ask for a password or collect account credentials in this preview.
+        </div>
+
+        <Button asChild size="lg" className="mt-8">
+          <Link to="/join">
+            Explore a profile journey <ArrowRight />
+          </Link>
+        </Button>
+
+        <p className="mt-6 text-sm">
+          <Link to="/help" className="text-primary">
+            Visit the Help Centre
+          </Link>
+        </p>
+      </div>
+    </section>
+  );
+}

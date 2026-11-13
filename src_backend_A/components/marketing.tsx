@@ -1,0 +1,29 @@
+import { Link } from "@tanstack/react-router";
+import { ArrowRight, BadgeCheck, BarChart3, FileCheck2, History, UserRound, Building2, Check, ShieldCheck, Link2, FileText, Search } from "lucide-react";
+import { Button } from "./ui/button";
+
+export const trustFeatures = [
+  { icon: BadgeCheck, title: "Verified Identities", description: "Know who’s on the other side. Identity and business information, with clear review status." },
+  { icon: BarChart3, title: "Authentic Social Performance", description: "Look beyond follower counts with clearly sourced audience and performance information." },
+  { icon: FileCheck2, title: "Transparent Product Information", description: "Understand the products you promote through supporting reports and certificates." },
+  { icon: History, title: "Evidence-Based Collaboration History", description: "Make informed decisions with documented campaigns, outcomes and collaboration records." },
+];
+export const steps = [
+  { title: "Build Your Profile", description: "Share your story, credentials and supporting evidence. Let your profile speak for you.", icon: UserRound },
+  { title: "Establish Credibility", description: "Add social accounts, business details and documents, with the source of every claim made clear.", icon: ShieldCheck },
+  { title: "Discover Collaborations", description: "Explore compatible opportunities and build partnerships with confidence.", icon: Search },
+];
+export function TrustFeatures() { return <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{trustFeatures.map(({ icon: Icon, title, description }) => <article className="feature-card" key={title}><div className="icon-tile"><Icon size={23} strokeWidth={1.7} /></div><h3 className="mt-6 text-base font-bold leading-6">{title}</h3><p className="mt-3 text-sm leading-6 text-muted-foreground">{description}</p></article>)}</div>; }
+export function Steps() { return <div className="grid gap-10 md:grid-cols-3">{steps.map((step, i) => <article key={step.title}><div className="mb-6 flex items-center gap-4"><span className="step-number">0{i + 1}</span><span className="h-px flex-1 bg-border" /></div><h3 className="text-lg font-bold">{step.title}</h3><p className="mt-3 max-w-xs text-sm leading-6 text-muted-foreground">{step.description}</p></article>)}</div>; }
+export function JoinButtons({ inverse = false }: { inverse?: boolean }) { return <div className="flex flex-wrap gap-3"><Button asChild size="lg" variant={inverse ? "hero" : "default"}><Link to="/join/$role" params={{ role: "creator" }}>Join as Creator <ArrowRight /></Link></Button><Button asChild size="lg" variant={inverse ? "heroOutline" : "outline"}><Link to="/join/$role" params={{ role: "brand" }}>Join as Brand <ArrowRight /></Link></Button></div>; }
+export function FinalCTA() { return <section className="bg-hero-surface py-16 text-hero-foreground"><div className="site-container flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center"><div><p className="mb-3 text-xs font-semibold uppercase tracking-widest text-hero-muted">Better together</p><h2 className="section-heading">Build Partnerships You Can Believe In.</h2><p className="mt-3 text-sm text-hero-muted">Your next great collaboration starts with a foundation of trust.</p></div><JoinButtons inverse /></div></section>; }
+export const creatorBenefits = ["Showcase your social media presence", "Present audience analytics with clear sources", "Display previous collaborations", "Share documented campaign ROI", "Upload supporting documents", "Discover reliable brands"];
+export const brandBenefits = ["Showcase your company’s credibility", "Present transparent product information", "Upload laboratory reports and certificates", "Display previous campaigns", "Share documented performance information", "Discover suitable creators"];
+export function AudienceSections() { return <section className="section-band"><div className="site-container grid gap-12 md:grid-cols-2">{[{ role: "creator", title: "Your influence. Your credibility.", sub: "For creators", benefits: creatorBenefits, icon: UserRound }, { role: "brand", title: "Great products. Trusted voices.", sub: "For brands", benefits: brandBenefits, icon: Building2 }].map(({ role, title, sub, benefits, icon: Icon }) => <article key={role} className="border-t border-border pt-8"><div className="eyebrow"><Icon size={15} />{sub}</div><h2 className="mt-4 text-2xl font-bold">{title}</h2><ul className="my-6 grid gap-3">{benefits.map(text => <li className="flex items-center gap-3 text-sm text-muted-foreground" key={text}><Check className="size-4 shrink-0 text-primary" />{text}</li>)}</ul><Button asChild variant="outline"><Link to="/join/$role" params={{ role }}>Create Your {role === "creator" ? "Creator" : "Brand"} Profile <ArrowRight /></Link></Button></article>)}</div></section>; }
+export const evidenceLevels = [
+  { icon: UserRound, title: "Self-reported", text: "Information shared by the creator or brand. Not independently confirmed." },
+  { icon: Link2, title: "Platform-connected", text: "Information obtained directly from a connected social platform, when available." },
+  { icon: FileText, title: "Document-supported", text: "Claims accompanied by documents. A document alone does not mean a claim is verified." },
+  { icon: ShieldCheck, title: "Independently verified", text: "Information reviewed by an independent party, with the scope and date of review disclosed." },
+];
+export function EvidenceLevels() { return <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{evidenceLevels.map(({ icon: Icon, title, text }) => <article key={title} className="feature-card"><Icon className="mb-5 size-6 text-primary" /><h3 className="text-base font-bold">{title}</h3><p className="mt-3 text-sm leading-6 text-muted-foreground">{text}</p></article>)}</div>; }
