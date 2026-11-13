@@ -1,0 +1,5 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { Steps, FinalCTA } from '@/components/marketing';
+import { pageMeta } from '@/lib/page-meta';
+export const Route = createFileRoute('/how-it-works')({ head: () => pageMeta('How It Works', 'Build your profile, establish credibility and discover informed collaboration opportunities.'), component: HowItWorks });
+function HowItWorks() { return <><section className="section-band"><div className="site-container"><p className="eyebrow">A clearer path to partnership</p><h1 className="section-heading mt-4">From your first introduction<br />to your next great collaboration.</h1><p className="mt-5 max-w-xl text-muted-foreground">Three thoughtful steps. One shared foundation of trust.</p><div className="mt-14"><Steps /></div><p className="journey-banner mt-12">Phase one includes website navigation and demo profile journeys. Reviews, saved accounts and collaboration discovery are planned for later phases.</p></div></section><FinalCTA /></>; }
